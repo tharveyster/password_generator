@@ -1,19 +1,27 @@
 // Assignment Code
-var numChars;
+var characterCount;
 var useLowercase;
 var useUppercase;
 var useNumbers;
 var useSpecialChars;
-var lowerCharacters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-var upperCharacters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+var lowerCharacters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var upperCharacters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var numberCharacters = [0,1,2,3,4,5,6,7,8,9];
-var specialCharacters = ['!','\"','#','$','%','&','\'','(',')','*','+',',','-','.','/','\:','\;','<','=','>','?','@','[','\\',']','^','_','`','{','|','}','~'];
-var selectedCharTypes;
-var assemblePassword = new Array;
+var specialCharacters = ["!","\"","#","$","%","&","\'","(",")","*","+",",","-",".","/","\:","\;","<","=",">","?","@","[","\\","]","^","_","`","{","|","}","~"];
+var selectedCharTypes = [];
+var assemblePassword = [];
+var password;
+var passwordText;
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  characterCount = 0;
+  selectedCharTypes = [];
+  assemblePassword = [];
+  password = "";
+  passwordText = "";
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -27,22 +35,27 @@ generateBtn.addEventListener("click", writePassword);
 // Choose the criteria for password creation
 function generatePassword() {
   // Ask for number of characters
-  numChars = parseInt(prompt("Please choose a password length between 8 and 128 characters"));
+  characterCount = parseInt(prompt("Please choose a password length between 8 and 128 characters"));
 
-  if (!numChars || (numChars < 8 || numChars > 128)) {
+  while (!characterCount || (characterCount < 8 || characterCount > 128)) {
     alert("You must enter a number between 8 and 128!");
-    generatePassword();
-  } else {
+    characterCount = parseInt(prompt("Please choose a password length between 8 and 128 characters"));
+  }
+  
+  useLowercase = confirm("Should the password contain lowercase letters?");
+  useUppercase = confirm("Should the password contain UPPSERCASE letters?");
+  useNumbers = confirm("Should the password contain numbers?");
+  useSpecialChars = confirm("Should the password contain special characaters?");
+  
+  while (useLowercase === false && useUppercase === false && useNumbers === false && useSpecialChars === false) {
+    alert("You must select at least one character type!");
     useLowercase = confirm("Should the password contain lowercase letters?");
-    useUppercase = confirm("Should the password contain UPPSERCASE letters?");
+    useUppercase = confirm("Should the password contain UPPERCASE letters?");
     useNumbers = confirm("Should the password contain numbers?");
     useSpecialChars = confirm("Should the password contain special characaters?");
-  }
+}
 
-  if (useLowercase === false && useUppercase === false && useNumbers === false && useSpecialChars === false) {
-    alert("You must select at least one character type!");
-    generatePassword();
-  } else if (useLowercase === true && useUppercase === true && useNumbers === true && useSpecialChars === true) {
+if (useLowercase === true && useUppercase === true && useNumbers === true && useSpecialChars === true) {
     selectedCharTypes = lowerCharacters.concat(upperCharacters, numberCharacters, specialCharacters);
   } else if (useLowercase === true && useUppercase === true && useNumbers === true) {
     selectedCharTypes = lowerCharacters.concat(upperCharacters, numberCharacters);
@@ -74,7 +87,7 @@ function generatePassword() {
     selectedCharTypes = specialCharacters;
   }
 
-  for (var i = 0; i < numChars; i++) {
+  for (var i = 0; i < characterCount; i++) {
     var randomChars = selectedCharTypes[Math.floor(Math.random() * selectedCharTypes.length)];
     assemblePassword.push(randomChars);
     finalPassword = assemblePassword.join("");
