@@ -17,7 +17,7 @@ The app can be run multiple times *without refreshing the page*, and will replac
 ## Page Link
 The project can be viewed at <https://tharveyster.github.io/password_generator/>.
 
-## Screenshot
+## Screenshots
 
 ![The Password Generator application displays a red button to "Generate Password".](./assets/images/password-generator-screenshot.png)
 ![The Password Generator application shows a password that meets requirements specified by the user.](./assets/images/password-generator-screenshot2.png)
