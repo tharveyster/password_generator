@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a random password generator that creates a password based upon specifications determined by user responses to prompts.
+This project is a random password generator that creates a password based upon specifications determined by user responses to prompts. It was created using HTML, CSS, and Javascript.
 
 The password size must be between **8** and **128** characters, and if no response is provided, or if the response is outside of that range, it displays an **<span style="color: red">alert</span>** displaying the requirements and returns the user to the number of characters prompt.
 
